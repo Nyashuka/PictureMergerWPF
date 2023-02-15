@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programming\\Sharp\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj": {}
+    "D:\\Programming\\Projects\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj": {}
   },
   "projects": {
-    "D:\\Programming\\Sharp\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj": {
+    "D:\\Programming\\Projects\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Sharp\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj",
+        "projectUniqueName": "D:\\Programming\\Projects\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj",
         "projectName": "PictureMergerWPF",
-        "projectPath": "D:\\Programming\\Sharp\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj",
+        "projectPath": "D:\\Programming\\Projects\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj",
         "packagesPath": "C:\\Users\\Nyashuka\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Sharp\\PictureMergerWPF\\PictureMergerWPF\\obj\\",
+        "outputPath": "D:\\Programming\\Projects\\PictureMergerWPF\\PictureMergerWPF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -48,6 +48,10 @@
             "MaterialDesignThemes": {
               "target": "Package",
               "version": "[4.7.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
             }
           },
           "imports": [

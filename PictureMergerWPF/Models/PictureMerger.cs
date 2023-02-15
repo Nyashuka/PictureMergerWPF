@@ -1,8 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using Assets.notebook_project.CodeBase;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -15,26 +18,43 @@ namespace PictureMergerWPF.Models
         private RenderTargetBitmap _bmp;
         private string[] _files;
         public bool BitmapCreated { get; private set; }
-        
+        private Pathes _pathes;
+        private string _configPath = "config.json";
         public PictureMerger()
         {
             _bmp = new RenderTargetBitmap(1, 1, 1, 1, PixelFormats.Pbgra32);
             _files = new string[] { };
             BitmapCreated = false;
+            _pathes = LoadPathes();
+        }
+
+        private void SavePathes(string savePath, string loadPath)
+        {
+            _pathes = new Pathes(savePath, loadPath);
+            Serializator.Instance.Serialize(_pathes, _configPath);
+        }
+
+        private Pathes LoadPathes()
+        {
+            if (!File.Exists(_configPath))
+                return new Pathes("","");
+
+            return Serializator.Instance.Deserialize<Pathes>(_configPath);
         }
 
         public void LoadFiles()
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Image Files(*.jpg;*.png)|*.jpg;*.png";
-            fileDialog.Multiselect = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = _pathes.LoadPath;
+            openFileDialog.Filter = "Image Files(*.jpg;*.png)|*.jpg;*.png";
+            openFileDialog.Multiselect = true;
 
-            if (fileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true)
             {
-                _files = fileDialog.FileNames;
-            }
-            else
-                return;
+                _files = openFileDialog.FileNames;
+                if(_files.Length > 0)
+                    SavePathes(_pathes.SavePath, Path.GetDirectoryName(_files[0]));
+            }     
         }
 
         public List<PictureInfo> GetFileList()
@@ -54,33 +74,38 @@ namespace PictureMergerWPF.Models
 
         public void SavePicture()
         {
-            _bmp = CreateMergedImage();
-
-            if (_files.Length == 0 || BitmapCreated == false)
-                return;
-
-            PngBitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(_bmp));
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = @"C:\Users\Nyashuka\Desktop";
-            saveFileDialog.Filter = "Images (*.png)|*.png";
-
-            if (saveFileDialog.ShowDialog() == true)
+            Task.Run(() =>
             {
-                try
-                {
-                    using (Stream stream = File.Create(saveFileDialog.FileName))
-                        encoder.Save(stream);
+                _bmp = CreateMergedImage();
 
-                    MessageBox.Show($"Succesfully saved in \n\"{saveFileDialog.FileName}\"");
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show($"Save error: {error.Message}");
-                }
+                if (_files.Length == 0 || BitmapCreated == false)
+                    return;
 
-            }
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(_bmp));
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.InitialDirectory = _pathes.SavePath;
+                saveFileDialog.Filter = "Images (*.png)|*.png";
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    try
+                    {
+                        using (Stream stream = File.Create(saveFileDialog.FileName))
+                            encoder.Save(stream);
+
+                        SavePathes(Path.GetDirectoryName(saveFileDialog.FileName), _pathes.LoadPath);
+
+                        MessageBox.Show($"Succesfully saved in \n\"{saveFileDialog.FileName}\"");
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show($"Save error: {error.Message}");
+                    }
+
+                }
+            });        
         }  
 
         private int GetWidth(string[] pathes)
@@ -99,6 +124,7 @@ namespace PictureMergerWPF.Models
 
         public RenderTargetBitmap CreateMergedImage()
         {
+           
             int height = 0;
             int width = GetWidth(_files);
 

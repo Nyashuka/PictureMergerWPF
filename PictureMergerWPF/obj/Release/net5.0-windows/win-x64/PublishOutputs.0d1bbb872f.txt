@@ -1,0 +1,11 @@
+C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.pdb
+C:\Users\Nyashuka\Desktop\my_app\clrcompression.dll
+C:\Users\Nyashuka\Desktop\my_app\clrjit.dll
+C:\Users\Nyashuka\Desktop\my_app\coreclr.dll
+C:\Users\Nyashuka\Desktop\my_app\mscordaccore.dll
+C:\Users\Nyashuka\Desktop\my_app\D3DCompiler_47_cor3.dll
+C:\Users\Nyashuka\Desktop\my_app\PenImc_cor3.dll
+C:\Users\Nyashuka\Desktop\my_app\PresentationNative_cor3.dll
+C:\Users\Nyashuka\Desktop\my_app\vcruntime140_cor3.dll
+C:\Users\Nyashuka\Desktop\my_app\wpfgfx_cor3.dll
+C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.exe
