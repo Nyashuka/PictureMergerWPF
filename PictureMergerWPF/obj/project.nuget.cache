@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ld9dxsRNkyDQQRLKIsgJfulPMSqQURVOg3z3NgZzD0agt2aOoAyBHcWIfvw23ThFBHwghVa9kTplG+L4AQUy4Q==",
+  "success": true,
+  "projectFilePath": "D:\\Programming\\Sharp\\PictureMergerWPF\\PictureMergerWPF\\PictureMergerWPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nyashuka\\.nuget\\packages\\materialdesigncolors\\2.1.0\\materialdesigncolors.2.1.0.nupkg.sha512",
+    "C:\\Users\\Nyashuka\\.nuget\\packages\\materialdesignthemes\\4.7.0\\materialdesignthemes.4.7.0.nupkg.sha512",
+    "C:\\Users\\Nyashuka\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,79 @@
+﻿<Window x:Class="PictureMergerWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:PictureMergerWPF.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:PictureMergerWPF"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="800"
+        ResizeMode="NoResize"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <DataGrid Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding SelectedPictures}" 
+                      ScrollViewer.CanContentScroll="True" 
+                      VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="0.5*" Header="Pos"  Binding="{Binding Id}"/>
+                <DataGridTextColumn Width="1*" Header="Name"  Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="1*" Header="Path"  Binding="{Binding Path}"/>
+                <!--<DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button>Up</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<StackPanel Width="700" Height="350"  Orientation="Vertical" 
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Margin=" 10 10 10 0">
+            <TextBlock x:Name="FilesCount_TextBlock" Text="Selected items: 0"
+                       HorizontalAlignment="Center">
+
+            </TextBlock>
+            
+           
+            --><!--<ScrollViewer Width="auto" Height="200" VerticalScrollBarVisibility="Auto">
+                <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" x:Name="FilesNames_TextBlock"  HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" Margin="0" FontSize="20"
+                   Text="No Files" TextWrapping="Wrap"
+                   >
+--><!--ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto"--><!--
+                </TextBlock>-->
+            <!--</ScrollViewer>--><!--
+        </StackPanel>-->
+       
+           
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Style="{StaticResource MaterialDesignPaperDarkButton}"  Content="Завантажити картинки" HorizontalAlignment="Left" Margin="10"  
+                    VerticalAlignment="Top" Command="{Binding LoadFilesCommand}"/>
+
+            <!--<Button Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Merge images" HorizontalAlignment="Left"  Margin="10" 
+                    VerticalAlignment="Top"/>-->
+
+            <Button Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Зеберегти" HorizontalAlignment="Left"  Margin="10" 
+                    VerticalAlignment="Top" Command="{Binding SaveMergedPictureCommand}"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
