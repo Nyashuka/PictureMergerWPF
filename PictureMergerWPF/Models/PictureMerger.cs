@@ -122,6 +122,13 @@ namespace PictureMergerWPF.Models
             return width;
         }
 
+        public void ChangePos(int firstId, int secondId)
+        {
+            string firstPath = _files[firstId];
+            _files[firstId] = _files[secondId];
+            _files[secondId] = firstPath;
+        }
+
         public RenderTargetBitmap CreateMergedImage()
         {
            

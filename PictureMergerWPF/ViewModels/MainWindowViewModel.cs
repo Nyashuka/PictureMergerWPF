@@ -2,6 +2,8 @@
 using PictureMergerWPF.Models;
 using PictureMergerWPF.ViewModels.Base;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PictureMergerWPF.ViewModels
@@ -52,6 +54,55 @@ namespace PictureMergerWPF.ViewModels
         }
         #endregion
 
+        #region Change image position
+        public ICommand ChangeToUpFilePositionCommand { get; }
+        public ICommand ChangeToDownFilePositionCommand { get; }
+
+        private bool CanChangeFilePositionCommand(object p) => true;
+        private void OnToUpChangeFilePositionCommand(object p)
+        {
+            if (SelectedPictures == null)
+                return;
+
+            PictureInfo obj = p as PictureInfo;
+
+            if (obj == null)
+                return;
+
+            if(obj.Id > 0)
+            {
+                _pictureMerger.ChangePos(obj.Id, obj.Id - 1);
+            }
+            else if(obj.Id == 0)
+            {
+                _pictureMerger.ChangePos(obj.Id, SelectedPictures.Count - 1);
+            }
+
+            SelectedPictures = _pictureMerger.GetFileList();
+        }
+        private void OnToDownChangeFilePositionCommand(object p)
+        {
+            if (SelectedPictures == null)
+                return;
+
+            PictureInfo obj = p as PictureInfo;
+
+            if (obj == null)
+                return;
+
+            if (obj.Id < SelectedPictures.Count - 1)
+            {
+                _pictureMerger.ChangePos(obj.Id, obj.Id + 1);
+            }
+            else if(obj.Id == SelectedPictures.Count - 1)
+            {
+                _pictureMerger.ChangePos(obj.Id, 0);
+            }
+
+            SelectedPictures = _pictureMerger.GetFileList();
+        }
+        #endregion
+
         #endregion
 
         #region Constructor
@@ -59,6 +110,8 @@ namespace PictureMergerWPF.ViewModels
         {
             LoadFilesCommand = new LambdaCommand(OnLoadFilesCommandExecute, CanLoadFilesCommandExecute);
             SaveMergedPictureCommand = new LambdaCommand(OnSaveMergedPictureCommandExecute, CanSaveMergedPictureCommandExecute);
+            ChangeToUpFilePositionCommand = new LambdaCommand(OnToUpChangeFilePositionCommand, CanChangeFilePositionCommand);
+            ChangeToDownFilePositionCommand = new LambdaCommand(OnToDownChangeFilePositionCommand, CanChangeFilePositionCommand);
             _pictureMerger = new PictureMerger();
             _selectedPictures = new List<PictureInfo>();
         }

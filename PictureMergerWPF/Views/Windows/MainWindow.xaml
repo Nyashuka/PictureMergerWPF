@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:PictureMergerWPF"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
 
@@ -16,38 +16,66 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="350"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0">
+            <TabItem Header="Файли">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding SelectedPictures}" 
-                      ScrollViewer.CanContentScroll="True" 
-                      VerticalScrollBarVisibility="Visible"
-                      HorizontalScrollBarVisibility="Visible">
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="0.5*" Header="Pos"  Binding="{Binding Id}"/>
-                <DataGridTextColumn Width="1*" Header="Name"  Binding="{Binding Name}"/>
-                <DataGridTextColumn Width="1*" Header="Path"  Binding="{Binding Path}"/>
-                <!--<DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button>↑</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button>↓</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
-            </DataGrid.Columns>
-        </DataGrid>
+
+                    <DataGrid x:Name="FilesList_DataGrid" Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding SelectedPictures}" 
+                          ScrollViewer.CanContentScroll="True" 
+                          VerticalScrollBarVisibility="Visible"
+                          HorizontalScrollBarVisibility="Visible">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Width="0.5*" Header="Порядок"  Binding="{Binding Id}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Назва файлу"  Binding="{Binding Name}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Шлях до файлу"  Binding="{Binding Path}"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="↑" Command="{Binding Path=DataContext.ChangeToUpFilePositionCommand, 
+                                                        RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" />
+                                        <!--<Button Content="↑" Click="OnToUpButton_Click" />-->
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="↓" Command="{Binding Path=DataContext.ChangeToDownFilePositionCommand, 
+                                                        RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Button Style="{StaticResource MaterialDesignPaperDarkButton}"  Content="Завантажити картинки" HorizontalAlignment="Left" Margin="10"  
+                    VerticalAlignment="Top" Command="{Binding LoadFilesCommand}"/>
+
+                        <!--<Button Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Merge images" HorizontalAlignment="Left"  Margin="10" 
+                    VerticalAlignment="Top"/>-->
+
+                        <Button Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Зберегти" HorizontalAlignment="Left"  Margin="10" 
+                    VerticalAlignment="Top" Command="{Binding SaveMergedPictureCommand}"/>
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Preview">
+                <Image>
+
+                </Image>
+            </TabItem>
+        </TabControl>
+
+
+
 
         <!--<StackPanel Width="700" Height="350"  Orientation="Vertical" 
                     HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -75,16 +103,7 @@
 
 
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <Button Style="{StaticResource MaterialDesignPaperDarkButton}"  Content="Завантажити картинки" HorizontalAlignment="Left" Margin="10"  
-                    VerticalAlignment="Top" Command="{Binding LoadFilesCommand}"/>
 
-            <!--<Button Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Merge images" HorizontalAlignment="Left"  Margin="10" 
-                    VerticalAlignment="Top"/>-->
-
-            <Button Style="{StaticResource MaterialDesignPaperDarkButton}" Content="Зеберегти" HorizontalAlignment="Left"  Margin="10" 
-                    VerticalAlignment="Top" Command="{Binding SaveMergedPictureCommand}"/>
-        </StackPanel>
 
     </Grid>
 </Window>
