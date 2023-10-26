@@ -1,0 +1,11 @@
+D:\Programming\Projects\Builds\PictureMergerWPF.pdb
+D:\Programming\Projects\Builds\clrcompression.dll
+D:\Programming\Projects\Builds\clrjit.dll
+D:\Programming\Projects\Builds\coreclr.dll
+D:\Programming\Projects\Builds\mscordaccore.dll
+D:\Programming\Projects\Builds\D3DCompiler_47_cor3.dll
+D:\Programming\Projects\Builds\PenImc_cor3.dll
+D:\Programming\Projects\Builds\PresentationNative_cor3.dll
+D:\Programming\Projects\Builds\vcruntime140_cor3.dll
+D:\Programming\Projects\Builds\wpfgfx_cor3.dll
+D:\Programming\Projects\Builds\PictureMergerWPF.exe
