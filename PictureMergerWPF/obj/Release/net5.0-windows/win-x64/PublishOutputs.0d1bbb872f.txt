@@ -1,9 +1,0 @@
-C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.exe
-C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.dll
-C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.deps.json
-C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.runtimeconfig.json
-C:\Users\Nyashuka\Desktop\my_app\PictureMergerWPF.pdb
-C:\Users\Nyashuka\Desktop\my_app\MaterialDesignColors.dll
-C:\Users\Nyashuka\Desktop\my_app\MaterialDesignThemes.Wpf.dll
-C:\Users\Nyashuka\Desktop\my_app\Microsoft.Xaml.Behaviors.dll
-C:\Users\Nyashuka\Desktop\my_app\Newtonsoft.Json.dll
